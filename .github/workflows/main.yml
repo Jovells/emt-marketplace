@@ -18,10 +18,13 @@ jobs:
 
       - name: Fetch Upstream
         run: |
+          git config --global user.email "jovells.appiah@gmail.com"
+          git config --global user.name "Jovells"
           git remote add upstream https://github.com/mowblox/emt-marketplace/
           git fetch upstream
           git checkout main
           git rebase upstream/main
+          
 
       - name: Push Changes
         uses: ad-m/github-push-action@master
