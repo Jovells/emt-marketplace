@@ -24,8 +24,6 @@ jobs:
           git fetch upstream
           git checkout main
           git rebase upstream/main
-          
-
       - name: Push Changes
         uses: ad-m/github-push-action@master
         with:
