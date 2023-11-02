@@ -18,12 +18,14 @@ jobs:
 
       - name: Fetch Upstream
         run: |
+          git remote add upstream https://github.com/mowblox/emt-marketplace/
           git fetch upstream
           git checkout main
-          git merge upstream/main
+          git rebase upstream/main
 
       - name: Push Changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
+          force: true
