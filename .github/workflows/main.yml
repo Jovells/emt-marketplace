@@ -1,0 +1,29 @@
+name: Sync Fork
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: main
+
+      - name: Fetch Upstream
+        run: |
+          git fetch upstream
+          git checkout main
+          git merge upstream/main
+
+      - name: Push Changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
